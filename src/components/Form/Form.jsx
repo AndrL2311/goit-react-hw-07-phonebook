@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
-import action from '../../redux/contacts/contacts-actions';
+import contactsOperations from '../../redux/contacts/contacts-operations';
 
 import s from './Form.module.css';
 
@@ -76,7 +76,7 @@ function Form({ onSubmit }) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmit: data => dispatch(action.addContact(data)),
+    onSubmit: data => dispatch(contactsOperations.addContact(data)),
   };
 };
 
