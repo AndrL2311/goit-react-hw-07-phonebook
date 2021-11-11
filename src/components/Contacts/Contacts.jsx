@@ -1,13 +1,17 @@
 import { connect } from 'react-redux';
+import { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import s from './Contacts.module.css';
-
 import Contact from '../Contact/Contact';
-// import { deleteContact } from '../../redux/contacts/contacts-actions';
 import contactsOperations from '../../redux/contacts/contacts-operations';
 
-function Contacts({ contacts, onDeleteContact }) {
+function Contacts({ contacts, onDeleteContact, getContacts }) {
+  useEffect(() => {
+    getContacts();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <ul className={s.list}>
       {contacts.map(contact => (
@@ -35,6 +39,7 @@ const mapStateToProps = ({ contacts: { items, filter } }) => ({
 });
 
 const mapDispachToProps = dispatch => ({
+  getContacts: () => dispatch(contactsOperations.fetchContacts()),
   onDeleteContact: dataId => dispatch(contactsOperations.deleteContact(dataId)),
 });
 
