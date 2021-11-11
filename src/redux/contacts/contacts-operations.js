@@ -22,7 +22,6 @@ const addContact = contact => dispatch => {
 const deleteContact = contactId => dispatch => {
   dispatch(deleteContactRequest());
   axios
-    // eslint-disable-next-line no-template-curly-in-string
     .delete(`/contacts/${contactId}`)
     .then(() => dispatch(deleteContactSuccess(contactId)))
     .catch(error => dispatch(deleteContactError(error)));
