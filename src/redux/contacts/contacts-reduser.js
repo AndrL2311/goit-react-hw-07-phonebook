@@ -4,7 +4,9 @@ import {
   addContactRequest,
   addContactSuccess,
   addContactError,
-  deleteContact,
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
   filterContact,
 } from './contacts-actions';
 // import addContact from './contacts-operations';
@@ -25,7 +27,7 @@ const itemsReducer = createReducer([], {
       return [...state, payload];
     }
   },
-  [deleteContact]: (state, { payload }) =>
+  [deleteContactSuccess]: (state, { payload }) =>
     state.filter(contact => contact.id !== payload),
 });
 
@@ -37,6 +39,9 @@ const loading = createReducer(false, {
   [addContactRequest]: () => true,
   [addContactSuccess]: () => false,
   [addContactError]: () => false,
+  [deleteContactRequest]: () => true,
+  [deleteContactSuccess]: () => false,
+  [deleteContactError]: () => false,
 });
 
 const counterReducer = combineReducers({

@@ -3,6 +3,9 @@ import {
   addContactRequest,
   addContactSuccess,
   addContactError,
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
 } from './contacts-actions';
 
 axios.defaults.baseURL = 'http://localhost:4040';
@@ -16,6 +19,18 @@ const addContact = contact => dispatch => {
     .catch(error => dispatch(addContactError(error)));
 };
 
-const contactsOperations = { addContact };
+const deleteContact = contactId => dispatch => {
+  dispatch(deleteContactRequest());
+  axios
+    // eslint-disable-next-line no-template-curly-in-string
+    .delete(`/contacts/${contactId}`)
+    .then(() => dispatch(deleteContactSuccess(contactId)))
+    .catch(error => dispatch(deleteContactError(error)));
+};
+
+// deleteContactSuccess,
+// deleteContactError,
+
+const contactsOperations = { addContact, deleteContact };
 
 export default contactsOperations;
